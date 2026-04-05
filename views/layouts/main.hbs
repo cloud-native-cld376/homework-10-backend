@@ -8,9 +8,24 @@
 </head>
 <body>
   <header class="site-header">
-    <h1>{{title}}</h1>
-    {{#if dbType}}
-      <p class="meta">Backend: <code>{{dbType}}</code></p>
+    <div class="header-row">
+      <h1>{{title}}</h1>
+      <nav class="site-nav" aria-label="Account">
+        {{#if currentUser}}
+          <span class="user-email">{{currentUser.email}}</span>
+          <form method="post" action="/logout" class="inline-form">
+            <button type="submit" class="btn-secondary btn-small">Log out</button>
+          </form>
+        {{else}}
+          <a href="/login">Log in</a>
+          <a href="/register">Register</a>
+        {{/if}}
+      </nav>
+    </div>
+    {{#if currentUser}}
+      {{#if dbType}}
+        <p class="meta">Backend: <code>{{dbType}}</code></p>
+      {{/if}}
     {{/if}}
   </header>
   <main class="container">

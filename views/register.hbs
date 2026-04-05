@@ -1,0 +1,21 @@
+{{#if error}}
+  <p class="banner banner-error" role="alert">{{error}}</p>
+{{/if}}
+
+<section class="card auth-card">
+  <h2>Create an account</h2>
+  <form method="post" action="/register" class="auth-form">
+    <label for="email">Email</label>
+    <input id="email" type="email" name="email" autocomplete="username" required />
+
+    <label for="password">Password</label>
+    <input id="password" type="password" name="password" autocomplete="new-password" required minlength="8" />
+    <p class="field-hint">At least 8 characters.</p>
+
+    <label for="confirm">Confirm password</label>
+    <input id="confirm" type="password" name="confirm" autocomplete="new-password" required minlength="8" />
+
+    <button type="submit">Register</button>
+  </form>
+  <p class="auth-switch">Already have an account? <a href="/login">Log in</a></p>
+</section>
