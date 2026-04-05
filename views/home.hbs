@@ -1,0 +1,41 @@
+{{#if error}}
+  <p class="banner banner-error" role="alert">{{error}}</p>
+{{/if}}
+{{#if success}}
+  <p class="banner banner-success" role="status">{{success}}</p>
+{{/if}}
+
+<section class="card">
+  <h2>Add a todo</h2>
+  <form method="post" action="/todos" class="form-row">
+    <label class="sr-only" for="new-todo">New todo</label>
+    <input id="new-todo" type="text" name="text" placeholder="What needs to be done?" required />
+    <button type="submit">Add</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Your list</h2>
+  {{#if todos.length}}
+    <ul class="todo-list">
+      {{#each todos}}
+        <li class="todo-item {{#if completed}}done{{/if}}">
+          <form method="post" action="/todos/{{id}}/toggle" class="inline-form">
+            <button type="submit" class="btn-toggle" title="Toggle completed" aria-label="Toggle completed">
+              {{#if completed}}✓{{else}}○{{/if}}
+            </button>
+          </form>
+          <form method="post" action="/todos/{{id}}/update-text" class="todo-edit-form">
+            <input type="text" name="text" value="{{text}}" required />
+            <button type="submit" class="btn-secondary">Save</button>
+          </form>
+          <form method="post" action="/todos/{{id}}/delete" class="inline-form" onsubmit="return confirm('Delete this todo?');">
+            <button type="submit" class="btn-danger">Delete</button>
+          </form>
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p class="empty">No todos yet. Add one above.</p>
+  {{/if}}
+</section>
